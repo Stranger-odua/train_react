@@ -1,10 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import FunctionalComponent from "./FunctionalComponent";
+import ClassComponent from "./ClassComponent";
+// import Menu from "./Menu";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <FunctionalComponent name='Nick'/>
+        <ClassComponent/>
+
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
