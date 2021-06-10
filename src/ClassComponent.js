@@ -1,46 +1,31 @@
 import React, {Component} from 'react';
+import FComponent from "./FComponent";
+
 
 class ClassComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            input: '',
-            items: []
+            name: 'Button not pressed'
         }
-
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.updateData = this.updateData.bind(this)
     }
 
-    handleChange(event) {
+    updateData = (value) => {
         this.setState({
-            input: event.target.value
+            name: value
         })
     }
 
-    handleSubmit(event) {
-        event.preventDefault()
-        this.setState({
-            input: this.state.input,
-            items: [...this.state.items, this.state.input]
-        })
-    }
-    
 
     render() {
-        return(
+        return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input value={this.state.input} onChange={this.handleChange}/>
-                    <button type='submit'>Submit!</button>
-                </form>
+                <p>State: {this.state.name}</p>
 
-                <ul>
-                    {this.state.items.map((item, index) => (
-                        <li key={index}>{item}</li>
-                    ))}
-                </ul>
+
+                <FComponent updateData={this.updateData}/>
+
             </div>
         )
     }
