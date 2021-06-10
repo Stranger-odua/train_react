@@ -1,53 +1,50 @@
 import React, {Component} from 'react';
-import Menu from "./Menu";
 
 class ClassComponent extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            count:0
+            input: '',
+            items: []
         }
 
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
-        this.reset = this.reset.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    increment() {
-        this.setState(state => ({
-            count: state.count + 1
-        }))
+    handleChange(event) {
+        this.setState({
+            input: event.target.value
+        })
     }
 
-    decrement() {
-        this.setState(state => ({
-            count: state.count - 1
-        }))
+    handleSubmit(event) {
+        event.preventDefault()
+        this.setState({
+            input: this.state.input,
+            items: [...this.state.items, this.state.input]
+        })
     }
-
-    reset() {
-        this.setState(state => ({
-            count:0
-        }))
-    }
+    
 
     render() {
         return(
             <div>
-                <button onClick={this.increment}>increment</button>
-                <button onClick={this.decrement}>decrement</button>
-                <button onClick={this.reset}>reset</button>
-                <h2>Счетчик: {this.state.count}</h2>
+                <form onSubmit={this.handleSubmit}>
+                    <input value={this.state.input} onChange={this.handleChange}/>
+                    <button type='submit'>Submit!</button>
+                </form>
+
+                <ul>
+                    {this.state.items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                    ))}
+                </ul>
             </div>
         )
     }
 }
 
 
-    ClassComponent.defaultProps =
-        {
-            numbers: [1, 2, 3, 4, 5]
-        }
-
-    export default ClassComponent;
+export default ClassComponent;
